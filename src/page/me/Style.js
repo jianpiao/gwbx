@@ -6,6 +6,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f3f3f3'
     },
+    headerTitle: {
+        paddingLeft: 15, 
+        fontSize: 20, 
+        fontWeight: '600', 
+        color: '#000'
+    },  
     item: {
         flexDirection: 'row',
         paddingLeft: 15,

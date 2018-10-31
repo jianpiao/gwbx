@@ -6,22 +6,53 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f3f3f3'
     },
+    item: {
+        marginLeft: 10,
+        marginRight: 10,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 10
+    },
+    itemHeader: {
+        flexDirection: 'row',
+        borderBottomColor: '#eee',
+        borderBottomWidth: .8,
+        paddingTop: 8,
+        paddingBottom: 8,
+    },
+    itemHeaderRight: {
+        flex: 1,
+        alignItems: 'flex-end',
+    },
+    itemContent: {
+        flexDirection: 'row',
+        paddingTop: 8,
+        paddingBottom: 8
+    },
     img: {
-        height: screenHeight
+        width: 80,
+        height: 80,
+        borderRadius: 5,
+        marginLeft: 15,
     },
-    timeView: {
-        alignSelf: 'flex-end',
-        width: 90,
-        height: 40,
-        marginTop: 12,
-        marginRight: 12,
-        alignItems: 'center',
+    separ: {
+        height: 7,
+        backgroundColor: '#f3f3f3'
+    },
+    empty: {
+        flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,.2)',
-        borderRadius: 5
+        alignItems: 'center',
     },
-    time: {
-        color: '#fff'
+    listHead: {
+        height: 50,
+        justifyContent: 'center',
+        paddingLeft: 15,
+    },
+    listHeadText: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#000'
     }
 })
 

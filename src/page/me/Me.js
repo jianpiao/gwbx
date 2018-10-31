@@ -67,7 +67,7 @@ class ViewPictureScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <Text style={{paddingLeft: 15,fontSize: 18,fontWeight: '600',color: '#000'}}>我的信息</Text>
+                    <Text style={styles.headerTitle}>我的信息</Text>
                     {
                         this.state.list.map((item, index) => {
                             return (

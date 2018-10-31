@@ -6,6 +6,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f3f3f3'
     },
+    headerTitle:{
+        fontSize: 20,
+        fontWeight: '600',
+        color:'#000',
+        marginLeft: 15,
+        marginTop: 15,
+    },  
     item: {
         marginTop: 10, 
         marginLeft: 12, 

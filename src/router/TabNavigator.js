@@ -91,9 +91,9 @@ export default createMaterialTopTabNavigator({
             showLabel: true,//是否显示label，默认开启
             activeBackgroundColor: '#666',
             activeTintColor: '#000',
-            inactiveBackgroundColor: '#999',
+            inactiveBackgroundColor: '#777',
             pressColor: '#eee',//  波纹
-            inactiveTintColor: '#999', // label和icon的背景色 不活跃状态下（未选中）。
+            inactiveTintColor: '#777', // label和icon的背景色 不活跃状态下（未选中）。
             style: { //TabNavigator 的背景颜色
                 backgroundColor: '#fff',
                 height: 50

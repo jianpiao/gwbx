@@ -18,51 +18,44 @@ class Advertisement extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time: 2,
+            time: 1,
             loginState: false
         }
     }
 
     componentDidMount = () => {
-        const resetAction = StackActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({ routeName: 'tabNav' }),
-            ],
-        });
-        this.props.navigation.dispatch(resetAction);
-        // this.timeGoHome && clearInterval(this.timeGoHome);
-        // //  已经登录 进入首页
-        // this.getLoginState()
-        // this.timeGoHome = setInterval(() => {
-        //     if (this.state.time === 1) {
-        //         if (this.state.loginState) {
-        //             this.timeGoHome && clearInterval(this.timeGoHome);
-        //             //  已经登录 进入首页
-        //             const resetAction = StackActions.reset({
-        //                 index: 0,
-        //                 actions: [
-        //                     NavigationActions.navigate({ routeName: 'tabNav' }),
-        //                 ],
-        //             });
-        //             this.props.navigation.dispatch(resetAction);
-        //         } else {
-        //             //  未登录 进入登录页面
-        //             const resetAction = StackActions.reset({
-        //                 index: 0,
-        //                 actions: [
-        //                     NavigationActions.navigate({ routeName: 'Login' }),
-        //                 ],
-        //             });
-        //             this.props.navigation.dispatch(resetAction);
-        //             this.timeGoHome && clearInterval(this.timeGoHome);
-        //         }
-        //     } else {
-        //         this.setState({
-        //             time: this.state.time - 1
-        //         })
-        //     }
-        // }, 1000);
+        this.timeGoHome && clearInterval(this.timeGoHome);
+        //  已经登录 进入首页
+        this.getLoginState()
+        this.timeGoHome = setInterval(() => {
+            if (this.state.time === 1) {
+                if (this.state.loginState) {
+                    this.timeGoHome && clearInterval(this.timeGoHome);
+                    //  已经登录 进入首页
+                    const resetAction = StackActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'tabNav' }),
+                        ],
+                    });
+                    this.props.navigation.dispatch(resetAction);
+                } else {
+                    //  未登录 进入登录页面
+                    const resetAction = StackActions.reset({
+                        index: 0,
+                        actions: [
+                            NavigationActions.navigate({ routeName: 'Login' }),
+                        ],
+                    });
+                    this.props.navigation.dispatch(resetAction);
+                    this.timeGoHome && clearInterval(this.timeGoHome);
+                }
+            } else {
+                this.setState({
+                    time: this.state.time - 1
+                })
+            }
+        }, 1000);
     };
     componentWillUnmount = () => {
         this.timeGoHome && clearInterval(this.timeGoHome);
@@ -72,7 +65,7 @@ class Advertisement extends Component {
     getLoginState() {
         fetch(getURL + 'isLogin', {
             method: 'POST',
-            // mode: "cors",
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => res.json())

@@ -7,11 +7,11 @@ import {
 import styles from './Style'
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import { notice } from '../../redux/actions';
+import { notice, refreshing } from '../../redux/actions';
 import preventDoublePress from '../../global/preventDoublePress';
 
-//  查看图片
-class ViewPictureScreen extends Component {
+//  通知
+class NoticeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,16 +21,15 @@ class ViewPictureScreen extends Component {
 
 
     componentDidMount() {
-        // this.setState({
-        //     img:''
-        // })
+        this.props.dispatch(refreshing(true));
+        this.getNotice()
     } 
 
     //  提交
     getNotice = () => {
         fetch(getURL + 'GetNoticeList', {
             method: 'POST',
-            mode: "cors",
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 notice_type: 1
@@ -46,7 +45,6 @@ class ViewPictureScreen extends Component {
             }
         })
         .catch((err) => {
-            console.log(err);
             ToastAndroid.show('网络异常', ToastAndroid.SHORT);
         })
     }
@@ -57,6 +55,7 @@ class ViewPictureScreen extends Component {
         this.props.store.notice = this.props.store.notice.filter(m => m.notice_type == 1 && m.default == 1)
         return (
             <View style={styles.container}>
+                <Text style={styles.headerTitle}>通知</Text>
                 {
                     this.props.store.notice.map((item,index) => {
                         return (
@@ -86,4 +85,4 @@ const mapStateToProps = state => ({
     store: state.store
 })
 
-export default connect(mapStateToProps)(ViewPictureScreen);
+export default connect(mapStateToProps)(NoticeScreen);

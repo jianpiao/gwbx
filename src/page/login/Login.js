@@ -31,7 +31,7 @@ class LoginScreen extends Component {
         if (this.state.name.length > 0 && this.state.password.length >0) {
             fetch(getURL + 'login', {
                 method: 'POST',
-                // mode: "cors",
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     admin_name: this.state.name,
@@ -82,6 +82,7 @@ class LoginScreen extends Component {
                         <Text style={styles.title}>密码:</Text>
                         <TextInput
                             style={styles.textInput}
+                            textContentType="password"
                             onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
                         />

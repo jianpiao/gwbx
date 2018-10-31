@@ -30,13 +30,12 @@ class HomeScreen extends Component {
         this.props.dispatch(refreshing(true));
         this.getMyRepair();
     }
-    
 
     //  获取数据
     getMyRepair() {
         fetch(getURL+'myRepair', {
             method: 'POST',
-            mode: "cors",
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 repair_state: 2
@@ -45,20 +44,13 @@ class HomeScreen extends Component {
         .then((res) => res.json())
         .then((res) => {
             if (res.error == 0) {
-                console.log("执行了0");
-                console.log(res.data);
                 this.props.dispatch(getRepairList(res.data))
             } else {
-                console.log(res.data);
-                
-                console.log("执行了1");
                 ToastAndroid.show(res.data, ToastAndroid.SHORT);
             }
             this.props.dispatch(refreshing(false))
         })
         .catch((err) => {
-            console.log(err);
-            console.log("执行了2");
             this.props.dispatch(refreshing(false))
             ToastAndroid.show('网络异常', ToastAndroid.SHORT);
         })
@@ -86,12 +78,12 @@ class HomeScreen extends Component {
 
     //  行与行之间的分隔线组件
     itemSeparatorComponent = () => {
-        return <View style={{ height: 7, backgroundColor: '#f3f3f3' }} />
+        return <View style={styles.separ} />
     }
     //  列表为空时渲染该组件
     emptyComponent = () => {
         return (
-            <View style={{flex: 1,justifyContent: 'center',alignItems: 'center',}}>
+            <View style={styles.empty}>
                 <Text>暂无内容</Text>
             </View>
         )
@@ -99,8 +91,8 @@ class HomeScreen extends Component {
     //  列表头部
     listHeaderComponent = () => {
         return (
-            <View style={{height: 50,justifyContent: 'center',paddingLeft: 15,}}>
-                <Text style={{fontSize: 18,fontWeight: '600',color: '#000'}}>待处理: {this.props.store.getRepairList.length}</Text>
+            <View style={styles.listHead}>
+                <Text style={styles.listHeadText}>待处理: {this.props.store.getRepairList.length} 单</Text>
             </View>
         )
     }
@@ -124,16 +116,16 @@ class HomeScreen extends Component {
                             underlayColor="#eee"
                             key={index}
                             onPress={() => preventDoublePress.onPress(() => this.jumpDetail(item, index))}>
-                            <View style={{marginLeft: 10,marginRight: 10,backgroundColor:'#fff',borderRadius:5,padding:10}}>
-                               <View style={{flexDirection: 'row',borderBottomColor: '#eee',borderBottomWidth:.8,paddingTop:8,paddingBottom:8}}>
+                            <View style={styles.item}>
+                               <View style={styles.itemHeader}>
                                     <View>
                                         <Text onPress={() => preventDoublePress.onPress(() => this.call(`tel:${item.phone_number}`))}>{item.user_name}:{item.phone_number}</Text>
                                     </View>
-                                    <View style={{flex: 1,alignItems: 'flex-end',}}>
+                                    <View style={styles.itemHeaderRight}>
                                         <Text>{item.dormitory}</Text>
                                     </View>
                                </View>
-                                <View style={{ flexDirection: 'row', paddingTop: 8, paddingBottom: 8}}>
+                                <View style={styles.itemContent}>
                                     <View style={{ flex: 1, }}>
                                         <Text>{item.repair_content}</Text>
                                     </View>
@@ -141,7 +133,7 @@ class HomeScreen extends Component {
                                         {
                                             item.incidental_picture.length >0 ?
                                             <Image
-                                                style={{ width: 80, height: 80, borderRadius: 5, marginLeft: 15, }}
+                                                style={styles.img}
                                                 source={{ uri: item.incidental_picture[0] }}
                                             />
                                             :null
