@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
-import {
-    Platform,
-    StyleSheet,
-} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
+var screenHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#f3f3f3'
     },
-    loadMore: {
-        height: 50,
+    img: {
+        height: screenHeight
+    },
+    timeView: {
+        alignSelf: 'flex-end',
+        width: 90,
+        height: 40,
+        marginTop: 12,
+        marginRight: 12,
         alignItems: 'center',
         justifyContent: 'center',
-        borderTopColor: '#eee',
-        borderTopWidth: 0.8,
-        backgroundColor: '#fff'
+        backgroundColor: 'rgba(0,0,0,.2)',
+        borderRadius: 5
     },
-});
+    time: {
+        color: '#fff'
+    }
+})
 
 export default styles;

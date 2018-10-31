@@ -6,55 +6,63 @@ import {
     TouchableOpacity,
     ImageBackground
 } from 'react-native';
-import styles from './style'
+import styles from './Style'
 import { StackActions, NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import preventDoublePress from '../../global/preventDoublePress';
+import { isRefreshing, getRepairList } from '../../redux/actions';
 var screenHeight = Dimensions.get('window').height;
 
 
-class advertisement extends Component {
+class Advertisement extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            time:2,
+            time: 2,
             loginState: false
         }
     }
 
     componentDidMount = () => {
-        this.timeGoHome && clearInterval(this.timeGoHome);
-        //  已经登录 进入首页
-        this.getLoginState()
-        this.timeGoHome = setInterval(() => {
-            if (this.state.time === 1) {
-                if (this.state.loginState) {
-                    this.timeGoHome && clearInterval(this.timeGoHome);
-                    //  已经登录 进入首页
-                    const resetAction = StackActions.reset({
-                        index: 0,
-                        actions: [
-                            NavigationActions.navigate({ routeName: 'tabNav' }),
-                        ],
-                    });
-                    this.props.navigation.dispatch(resetAction);
-                } else {
-                    //  未登录 进入登录页面
-                    const resetAction = StackActions.reset({
-                        index: 0,
-                        actions: [
-                            NavigationActions.navigate({ routeName: 'Login' }),
-                        ],
-                    });
-                    this.props.navigation.dispatch(resetAction);
-                    this.timeGoHome && clearInterval(this.timeGoHome);
-                }
-            } else {
-                this.setState({
-                    time: this.state.time - 1
-                })
-            }
-        }, 1000);
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [
+                NavigationActions.navigate({ routeName: 'tabNav' }),
+            ],
+        });
+        this.props.navigation.dispatch(resetAction);
+        // this.timeGoHome && clearInterval(this.timeGoHome);
+        // //  已经登录 进入首页
+        // this.getLoginState()
+        // this.timeGoHome = setInterval(() => {
+        //     if (this.state.time === 1) {
+        //         if (this.state.loginState) {
+        //             this.timeGoHome && clearInterval(this.timeGoHome);
+        //             //  已经登录 进入首页
+        //             const resetAction = StackActions.reset({
+        //                 index: 0,
+        //                 actions: [
+        //                     NavigationActions.navigate({ routeName: 'tabNav' }),
+        //                 ],
+        //             });
+        //             this.props.navigation.dispatch(resetAction);
+        //         } else {
+        //             //  未登录 进入登录页面
+        //             const resetAction = StackActions.reset({
+        //                 index: 0,
+        //                 actions: [
+        //                     NavigationActions.navigate({ routeName: 'Login' }),
+        //                 ],
+        //             });
+        //             this.props.navigation.dispatch(resetAction);
+        //             this.timeGoHome && clearInterval(this.timeGoHome);
+        //         }
+        //     } else {
+        //         this.setState({
+        //             time: this.state.time - 1
+        //         })
+        //     }
+        // }, 1000);
     };
     componentWillUnmount = () => {
         this.timeGoHome && clearInterval(this.timeGoHome);
@@ -64,12 +72,13 @@ class advertisement extends Component {
     getLoginState() {
         fetch(getURL + 'isLogin', {
             method: 'POST',
+            // mode: "cors",
             headers: { 'Content-Type': 'application/json' },
         })
         .then((res) => res.json())
         .then((res) => {
+            console.log(res);
             if (res.error == 0) {
-                this.getShopSelect()
                 this.setState({
                     loginState: true
                 })
@@ -79,8 +88,11 @@ class advertisement extends Component {
                 })
             }
         })
+        .catch(err => {
+            console.log('错误');
+            console.log(err);
+        })
     }
-
     //  跳过广告
     jumpAdvent = () => {
         this.timeGoHome && clearInterval(this.timeGoHome);
@@ -111,8 +123,8 @@ class advertisement extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ImageBackground style={styles.img} source={{ uri: 'http://a0.att.hudong.com/65/93/20200000013920144728934736563_s.jpg'}} resizeMode='cover'>
-                    <TouchableOpacity 
+                <ImageBackground style={styles.img} source={require('../../static/img/logo.jpg')} resizeMode='contain'>
+                    <TouchableOpacity
                         onPress={() => preventDoublePress.onPress(() => this.jumpAdvent())}
                         activeOpacity={1}
                         style={styles.timeView}>
@@ -125,7 +137,7 @@ class advertisement extends Component {
 }
 
 const mapStateToProps = state => ({
-    counter: state.counter
+    store: state.store
 })
 
-export default connect(mapStateToProps)(advertisement);
+export default connect(mapStateToProps)(Advertisement);

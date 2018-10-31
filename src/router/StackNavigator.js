@@ -1,5 +1,6 @@
 import React from 'react';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { StyleSheet, Image } from 'react-native';
 import tabNav from './TabNavigator';
 
 
@@ -10,18 +11,11 @@ const headerStyle = {
     borderBottomWidth: 0.8
 }
 
-
-//  详情
-import DetailScreen from '../page/detail/Detail';                                  //  订单详情
-
-
-//  登录注册
-import LoginScreen from '../page/login/Login';                                      //  登录
-// import LogupScreen from '../src/page/login/logup/index';                         //  注册
-
-
-//  首页启动广告
-import AdvertisementScreen from '../page/advertisement/index';                      //  启动广告
+import ViewPictureScreen from '../page/viewPicture/ViewPicture';           //  查看图片
+import TextInputScreen from '../page/textInput.js/TextInput';           //  输入框
+import DetailScreen from '../page/detail/Detail';                       //  详情
+import LoginScreen from '../page/login/Login';                            //  登录
+import AdvertisementScreen from '../page/advertisement/Advertisement';                  //  启动广告
 
 const LoginPage = createSwitchNavigator({
     Login: LoginScreen
@@ -53,13 +47,28 @@ export default MyApp = createStackNavigator({
             headerStyle: headerStyle,
         })
     },
-    Login: {
-        screen: LoginPage,
+    ViewPicture: {
+        screen: ViewPictureScreen,
+        navigationOptions: {
+            header: null
+        }
+    },
+    TextInput: {
+        screen: TextInputScreen,
         navigationOptions: () => ({
-            title: '登录',
+            title: '编辑维修说明',
             headerStyle: headerStyle,
         })
+    },
+    Login: {
+        screen: LoginPage,
+        navigationOptions:{
+            header: null
+        }
     }
 }, {
+        // transitionConfig: TransitionConfiguration
         
+        //  设置打开应用默认显示的页面
+        // initialRouteName: tabNav,
     });

@@ -18,7 +18,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
+        <View style={styles.app}>
           <StackNavigator />
         </View>
       </Provider>
@@ -27,7 +27,7 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  app: {
     flex: 1,
     flexDirection: 'row'
   }

@@ -1,10 +1,19 @@
 import React from 'react';
 import { createMaterialTopTabNavigator, createBottomTabNavigator } from 'react-navigation';
-
+import { StyleSheet, Image, Text, View } from 'react-native';
 
 //  页面
 import HomeScreen from '../page/home/Home';
-import CompleteScreen from '../page/complete/Complete';
+import CompleteScreen from '../page/complete/Copmlete';
+import NoticeScreen from '../page/notice/Notice';
+import MeScreen from '../page/me/Me';
+
+const style = StyleSheet.create({
+    footImage: {
+        width: 23,
+        height: 23
+    }
+});  
 
 const headerStyle = {
     backgroundColor: '#fff',
@@ -13,6 +22,7 @@ const headerStyle = {
     borderBottomWidth: 1
 }
 
+
 //Tab
 export default createMaterialTopTabNavigator({
     //每一个页面的配置
@@ -20,23 +30,47 @@ export default createMaterialTopTabNavigator({
         screen: HomeScreen,
         navigationOptions: () => ({
             tabBarLabel: '待处理',
-            // tabBarIcon: ({ tintColor }) => (
-            //     <Image style={[style.footImage, { tintColor: tintColor }]}
-            //         source={require('../src/static/icon/new.png')}
-            //     />
-            // ),
+            tabBarIcon: ({ tintColor }) => (
+                <Image style={[style.footImage, { tintColor: tintColor }]}
+                    source={require('../static/img/wait.png')}
+                />
+            ),
             headerStyle: headerStyle
         })
     },
     Complete: {
         screen: CompleteScreen,
         navigationOptions: () => ({
-            tabBarLabel: '已完成',
-            // tabBarIcon: ({ tintColor }) => (
-            //     <Image style={[style.footImage, { tintColor: tintColor }]}
-            //         source={require('../src/static/icon/manage.png')}
-            //     />
-            // ),
+            tabBarLabel: '处理完成',
+            tabBarIcon: ({ tintColor }) => (
+                <Image style={[style.footImage, { tintColor: tintColor }]}
+                    source={require('../static/img/done.png')}
+                />
+            ),
+            headerStyle: headerStyle
+        })
+    },
+    Notice: {
+        screen: NoticeScreen,
+        navigationOptions: () => ({
+            tabBarLabel: '通知',
+            tabBarIcon: ({ tintColor }) => (
+                <Image style={[style.footImage, { tintColor: tintColor }]}
+                    source={require('../static/img/notice.png')}
+                />
+            ),
+            headerStyle: headerStyle
+        })
+    },
+    Me: {
+        screen: MeScreen,
+        navigationOptions: () => ({
+            tabBarLabel: '我的',
+            tabBarIcon: ({ tintColor }) => (
+                <Image style={[style.footImage, { tintColor: tintColor }]}
+                    source={require('../static/img/me.png')}
+                />
+            ),
             headerStyle: headerStyle
         })
     }
@@ -57,9 +91,9 @@ export default createMaterialTopTabNavigator({
             showLabel: true,//是否显示label，默认开启
             activeBackgroundColor: '#666',
             activeTintColor: '#000',
-            inactiveBackgroundColor: '#666',
-            pressColor: '#e9e9e9',//  波纹
-            inactiveTintColor: '#ccc', // label和icon的背景色 不活跃状态下（未选中）。
+            inactiveBackgroundColor: '#999',
+            pressColor: '#eee',//  波纹
+            inactiveTintColor: '#999', // label和icon的背景色 不活跃状态下（未选中）。
             style: { //TabNavigator 的背景颜色
                 backgroundColor: '#fff',
                 height: 50

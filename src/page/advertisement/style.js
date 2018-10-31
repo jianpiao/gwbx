@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
     },
     timeView: {
         alignSelf: 'flex-end',
-        width: 90, 
-        height: 40, 
+        width: 90,
+        height: 40,
         marginTop: 12,
         marginRight: 12,
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        backgroundColor: 'rgba(0,0,0,.2)', 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0,0,0,.2)',
         borderRadius: 5
     },
     time: {
