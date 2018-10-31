@@ -6,6 +6,7 @@ import {
     TextInput,
     Dimensions,
     ToastAndroid,
+    AsyncStorage,
     TouchableOpacity,
     ImageBackground
 } from 'react-native';
@@ -40,10 +41,8 @@ class LoginScreen extends Component {
             })
             .then((res) => res.json())
             .then((res) => {
-                console.log(res);
-                
                 if (res.error == 0) {
-                    this.props.dispatch(userInfo(res.data))
+                    this.saveData(res.data)
                     const resetAction = StackActions.reset({
                         index: 0,
                         actions: [
@@ -59,7 +58,16 @@ class LoginScreen extends Component {
             ToastAndroid.show('账户密码不能为空', ToastAndroid.SHORT);
         }
     }
-
+    //  保存历史记录
+    saveData = (data) => {
+        AsyncStorage.setItem('userInfo', JSON.stringify(data), (error) => {
+            if (error) {
+                //  保存失败
+            } else {
+                //  保存成功
+            }
+        })
+    }
 
     //  页面
     render() {
@@ -82,7 +90,7 @@ class LoginScreen extends Component {
                         <Text style={styles.title}>密码:</Text>
                         <TextInput
                             style={styles.textInput}
-                            textContentType="password"
+                            textContentType='password'
                             onChangeText={(password) => this.setState({ password })}
                             value={this.state.password}
                         />

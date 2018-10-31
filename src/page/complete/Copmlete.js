@@ -89,7 +89,7 @@ class CompleteScreen extends Component {
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={this.props.store.getRepairList}
+                    data={this.props.store.getDoneRepairList}
                     initialNumToRender={8}
                     refreshing={this.props.store.refreshing}
                     onRefresh={() => this.onRefresh()}

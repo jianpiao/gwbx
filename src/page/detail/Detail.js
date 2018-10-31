@@ -28,10 +28,10 @@ class DetailScreen extends Component {
     comfirm = () => {
         fetch(getURL + 'setNotes', {
             method: 'POST',
-            mode: "cors",
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                repair_state: this.props.store.detail.item.repair_state,
+                repair_id: this.props.store.detail.item.repair_id,
                 m_notes: this.props.store.detail.item.m_notes
             })
         })
@@ -46,12 +46,12 @@ class DetailScreen extends Component {
                     this.props.store.getDoneRepairList[index].m_notes = this.props.store.detail.item.m_notes
                     this.props.dispatch(getDoneRepairList(this.props.store.getDoneRepairList))
                 }
+                ToastAndroid.show('提交维修说明成功', ToastAndroid.SHORT);
             } else {
-                ToastAndroid.show(res.data, ToastAndroid.SHORT);
+                ToastAndroid.show('提交维修说明失败', ToastAndroid.SHORT);
             }
         })
         .catch((err) => {
-            console.log(err);
             ToastAndroid.show('网络异常', ToastAndroid.SHORT);
         })
     }
@@ -96,9 +96,9 @@ class DetailScreen extends Component {
                                     key={index} 
                                     activeOpacity={1}
                                     style={styles.item}
-                                    onPress={() => preventDoublePress.onPress(() => this.jumpTextInput(index,item.m_notes))}>
+                                    onPress={() => preventDoublePress.onPress(() => this.jumpTextInput(index, item.value))}>
                                     <View>
-                                        <Text>{item.title}</Text>
+                                        <Text style={{color:'#000'}}>{item.title}</Text>
                                     </View>
                                     <View style={styles.itemRight}>
                                         <Text>{item.value}</Text>
@@ -109,7 +109,7 @@ class DetailScreen extends Component {
                     }
                     <View style={styles.viewPicture}>
                         <View>
-                            <Text>图片描述</Text>
+                            <Text style={{ color: '#000' }}>图片描述</Text>
                         </View>
                         <View style={styles.images}>
                             {

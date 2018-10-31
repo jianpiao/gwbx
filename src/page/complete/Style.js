@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     empty: {
         flex: 1,
-        justifyContent: 'center',
+        marginTop: 100,
         alignItems: 'center',
     },
     listHead: {

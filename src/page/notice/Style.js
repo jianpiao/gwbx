@@ -33,6 +33,25 @@ const styles = StyleSheet.create({
     },
     noticeContent: {
         marginTop: 10,
+    },
+    separ: {
+        height: 7,
+        backgroundColor: '#f3f3f3'
+    },
+    empty: {
+        flex: 1,
+        marginTop: 100,
+        alignItems: 'center',
+    },
+    listHead: {
+        height: 50,
+        justifyContent: 'center',
+        paddingLeft: 15,
+    },
+    listHeadText: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: '#000'
     }
 })
 

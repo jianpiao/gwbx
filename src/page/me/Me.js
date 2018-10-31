@@ -3,6 +3,7 @@ import {
     Text,
     View,
     Image,
+    AsyncStorage,
     TouchableOpacity
 } from 'react-native';
 import styles from './Style'
@@ -16,13 +17,12 @@ class ViewPictureScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [
-                { title: '员工编号', value: this.props.store.userInfo.admin_id },
-                { title: '员工名称', value: this.props.store.userInfo.admin_name },
-                { title: '员工权限', value: this.type(this.props.store.userInfo.authority) },
-                { title: '管理校区', value: this.compus(this.props.store.userInfo.campus) }
-            ]
+            list: []
         }
+    }
+
+    componentDidMount() {
+        this.readData()
     }
 
     //  校区
@@ -44,10 +44,26 @@ class ViewPictureScreen extends Component {
         return a[i];
     }
 
-    componentDidMount() {
-        // this.setState({
-        //     img:''
-        // })
+    //  读取本地记录
+    readData = () => {
+        AsyncStorage.getItem('userInfo', (error, value) => {
+            if (error) {
+                //  读取失败
+            } else {
+                //  读取成功
+                if (value !== null) {
+                    value = JSON.parse(value);
+                    this.setState({
+                        list: [
+                            { title: '员工编号', value: value.admin_id },
+                            { title: '员工名称', value: value.admin_name },
+                            { title: '员工权限', value: this.type(value.authority) },
+                            { title: '管理校区', value: this.compus(value.campus) }
+                        ]
+                    })
+                }
+            }
+        })
     }
 
     //  跳转到登录
