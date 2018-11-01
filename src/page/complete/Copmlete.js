@@ -4,6 +4,7 @@ import {
     View,
     Image,
     FlatList,
+    Linking,
     Dimensions,
     ToastAndroid,
     TouchableHighlight
@@ -52,6 +53,16 @@ class CompleteScreen extends Component {
                 this.props.dispatch(refreshing(false))
                 ToastAndroid.show('网络异常', ToastAndroid.SHORT);
             })
+    }
+    //  打电话
+    call = (url) => {
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                console.log('无法打开' + url);
+            } else {
+                return Linking.openURL(url);
+            }
+        }).catch(err => console.error('无法打开', err));
     }
     //  跳转到详情
     jumpDetail = (item, index) => {
@@ -114,7 +125,7 @@ class CompleteScreen extends Component {
                                 </View>
                                 <View style={styles.itemContent}>
                                     <View style={{ flex: 1, }}>
-                                        <Text>{item.repair_content}</Text>
+                                        <Text style={{color:'#999'}}>{item.repair_content}</Text>
                                     </View>
                                     <View>
                                         {

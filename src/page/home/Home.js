@@ -4,8 +4,8 @@ import {
     View,
     Image,
     FlatList,
-    Dimensions,
     Linking,
+    Dimensions,
     ToastAndroid,
     TouchableHighlight
 } from 'react-native';
@@ -127,7 +127,7 @@ class HomeScreen extends Component {
                                </View>
                                 <View style={styles.itemContent}>
                                     <View style={{ flex: 1, }}>
-                                        <Text>{item.repair_content}</Text>
+                                        <Text style={{ color: '#999' }}>{item.repair_content}</Text>
                                     </View>
                                     <View>
                                         {

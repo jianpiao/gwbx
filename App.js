@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import { Platform, StyleSheet, Text, View, BackHandler} from 'react-native';
 import StackNavigator from './src/router/StackNavigator';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
@@ -15,6 +15,29 @@ console.disableYellowBox = true;
 console.warn('YellowBox is disabled.');
 
 export default class App extends Component {
+  componentWillMount() {
+    if (Platform.OS === 'android') {
+      BackHandler.addEventListener('hardwareBackPress', this.BackHandler);
+    }
+  }
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackHandler.removeEventListener('hardwareBackPress', this.BackHandler);
+    }
+  }
+
+
+  //  物理返回键 事件触发
+  BackHandler = () => {
+    if (this.state.lastBackPressed && this.state.lastBackPressed + 2000 >= Date.now()) {
+      BackHandler.exitApp()
+      return false
+    }
+    this.state.lastBackPressed = Date.now()
+    ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT)
+    return true
+  }
+
   render() {
     return (
       <Provider store={store}>
