@@ -82,7 +82,7 @@ class ViewPictureScreen extends Component {
         try {
             const { action } = DatePickerAndroid.open({
                 // 要设置默认值为今天的话，使用`new Date()`即可
-                date: new Date(),
+                date: new Date(tag == 0 ? this.state.startTime : this.state.endTime),
                 maxDate: tag == 0 ? new Date(this.state.endTime) : new Date(),
                 minDate: tag == 1 ? new Date(this.state.startTime) : new Date('2018-03-01'),
             }).then(({ year, month, day }) => {
