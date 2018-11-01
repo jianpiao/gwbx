@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Platform, StyleSheet, Text, View, BackHandler} from 'react-native';
+import { Platform, StyleSheet, Text, View, BackHandler, ToastAndroid} from 'react-native';
 import StackNavigator from './src/router/StackNavigator';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
@@ -15,6 +15,13 @@ console.disableYellowBox = true;
 console.warn('YellowBox is disabled.');
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lastBackPressed: 0
+    }
+  }
+
   componentWillMount() {
     if (Platform.OS === 'android') {
       BackHandler.addEventListener('hardwareBackPress', this.BackHandler);

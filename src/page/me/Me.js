@@ -83,8 +83,8 @@ class ViewPictureScreen extends Component {
             const { action } = DatePickerAndroid.open({
                 // 要设置默认值为今天的话，使用`new Date()`即可
                 date: new Date(),
-                maxDate: new Date(),
-                // minDate: new Date(2018, 11, 1)
+                maxDate: tag == 0 ? new Date(this.state.endTime) : new Date(),
+                minDate: tag == 1 ? new Date(this.state.startTime) : new Date('2018-03-01'),
             }).then(({ year, month, day }) => {
                 if (action !== DatePickerAndroid.dismissedAction) {
                     // 这里开始可以处理用户选好的年月日三个参数：year, month (0-11), day
