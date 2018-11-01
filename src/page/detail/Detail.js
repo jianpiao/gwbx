@@ -59,7 +59,7 @@ class DetailScreen extends Component {
     jumpTextInput = (index,note) => {
         if (index == 11) {
             this.props.navigation.navigate('TextInput', {
-                value: note
+                value: note == '点击填写' ? '' : note
             });
         }
     }

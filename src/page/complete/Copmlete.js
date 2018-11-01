@@ -106,10 +106,10 @@ class CompleteScreen extends Component {
                             <View style={styles.item}>
                                 <View style={styles.itemHeader}>
                                     <View>
-                                        <Text onPress={() => preventDoublePress.onPress(() => this.call(`tel:${item.phone_number}`))}>{item.user_name}:{item.phone_number}</Text>
+                                        <Text style={styles.headerText} onPress={() => preventDoublePress.onPress(() => this.call(`tel:${item.phone_number}`))}>{item.user_name}:{item.phone_number}</Text>
                                     </View>
                                     <View style={styles.itemHeaderRight}>
-                                        <Text>{item.dormitory}</Text>
+                                        <Text style={styles.headerText}>宿舍号:{item.dormitory}</Text>
                                     </View>
                                 </View>
                                 <View style={styles.itemContent}>

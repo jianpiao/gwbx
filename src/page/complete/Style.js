@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
         paddingTop: 8,
         paddingBottom: 8,
     },
+    headerText: {
+        color:'#000'
+    },  
     itemHeaderRight: {
         flex: 1,
         alignItems: 'flex-end',
